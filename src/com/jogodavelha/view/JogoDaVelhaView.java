@@ -5,10 +5,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+
+import com.jogodavelha.action.ActionLabel;
 
 public class JogoDaVelhaView extends JFrame {
 
@@ -19,6 +21,7 @@ public class JogoDaVelhaView extends JFrame {
 	private JLabel titulo;
 	private JLabel[] botao;
 	private JPanel painel;
+
 	
 	
 
@@ -49,7 +52,11 @@ public class JogoDaVelhaView extends JFrame {
 
 	private void initController() {
 		
+		for (int i = 0; i != botao.length; i++) {
 		
+		botao[i].addMouseListener(new ActionLabel(this));
+		
+		}
 	}
 
 	private void initComponents() {
@@ -64,9 +71,11 @@ public class JogoDaVelhaView extends JFrame {
 		for (int i = 0; i != botao.length; i++) {
 			
 			botao[i] = new JLabel();
-			botao[i].setBorder(BorderFactory.createEtchedBorder()); 
+			botao[i].setName(String.valueOf(i));
+			botao[i].setBorder(BorderFactory.createLineBorder(Color.black,1)); 
 			botao[i].setPreferredSize(new Dimension(110,110));
-			botao[i].setBackground( new Color(200,255,255) );
+			
+			
 			painel.add(botao[i]);
 		}
 		
@@ -76,9 +85,16 @@ public class JogoDaVelhaView extends JFrame {
 		this.painel.setBounds(325, 100, 350, 350);
 		
 		
-		
+}
+
+	public JLabel[] getBotao() {
+		return botao;
 	}
 
-	
-	
+	public int setBotao(Border borda, int posicao) {
+		
+		this.botao[posicao].setBorder(borda);
+		return posicao;
+	}
+
 }
