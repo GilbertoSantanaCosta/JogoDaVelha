@@ -21,10 +21,25 @@ public class JogoDaVelhaView extends JFrame {
 	private JLabel titulo;
 	private JLabel[] botao;
 	private JPanel painel;
-
+	private String imgX = "/imagens/x.jpg";
+	private String imgO = "/imagens/o.jpg";
 	
-	
 
+	public String getImgX() {
+		return imgX;
+	}
+
+	public void setImgX(String imgX) {
+		this.imgX = imgX;
+	}
+
+	public String getImgO() {
+		return imgO;
+	}
+
+	public void setImgO(String imgO) {
+		this.imgO = imgO;
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -75,7 +90,6 @@ public class JogoDaVelhaView extends JFrame {
 			botao[i].setBorder(BorderFactory.createLineBorder(Color.black,1)); 
 			botao[i].setPreferredSize(new Dimension(110,110));
 			
-			
 			painel.add(botao[i]);
 		}
 		
@@ -96,5 +110,14 @@ public class JogoDaVelhaView extends JFrame {
 		this.botao[posicao].setBorder(borda);
 		return posicao;
 	}
+	
+    public int setBotao(Border borda, int posicao, String imagen) {
+		System.out.println(posicao);
+		botao[posicao].setIcon(new javax.swing.ImageIcon(getClass().getResource(imagen)));
+		this.botao[posicao].setBorder(borda);
+		return posicao;
+	}
+
+	
 
 }
