@@ -3,10 +3,12 @@ package com.jogodavelha.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Objects;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -19,12 +21,19 @@ public class JogoDaVelhaView extends JFrame {
 	 */
 
 	private JLabel titulo;
-	private JLabel[] botao;
+	public JLabel pontoX;
+	public JLabel pontoO;
+	public JLabel[] botao;
 	private JPanel painel;
 	private String img;
 	private final String imgX = "/imagens/x.jpg";
 	private final String imgO = "/imagens/o.jpg";
 	private int jaSelecionado;
+	public final String caminhoX = "file:/C:/Users/gsdc/eclipse-workspace/jogo_da_velha/bin/imagens/x.jpg";
+	public final String caminhoO = "file:/C:/Users/gsdc/eclipse-workspace/jogo_da_velha/bin/imagens/o.jpg";
+	public int contador = 0;
+	public int pontosX = 0;
+	public int pontosO = 0;
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +43,7 @@ public class JogoDaVelhaView extends JFrame {
 		initController();
 		initPanel();
 
-		setSize(1000, 600);
+		setSize(500, 500);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,6 +55,8 @@ public class JogoDaVelhaView extends JFrame {
 		RecebePainel.setLayout(null);
 		RecebePainel.add(painel);
 		RecebePainel.add(titulo);
+		RecebePainel.add(pontoX);
+		RecebePainel.add(pontoO);
 		this.add(RecebePainel);
 
 	}
@@ -63,7 +74,15 @@ public class JogoDaVelhaView extends JFrame {
 
 		titulo = new JLabel("Jogo da Velha");
 		titulo.setFont(new Font("Courier", Font.BOLD + Font.ITALIC, 20));
-		this.titulo.setBounds(420, 10, 200, 70);
+		this.titulo.setBounds(170, 0, 200, 70);
+		
+		pontoX = new JLabel("Jogador X: 0");
+		pontoX.setFont(new Font("Courier", Font.BOLD + Font.ITALIC, 13));
+		this.pontoX.setBounds(75, 400, 100, 70);
+		
+		pontoO = new JLabel("Jogador O: 0");
+		pontoO.setFont(new Font("Courier", Font.BOLD + Font.ITALIC, 13));
+		this.pontoO.setBounds(330, 400, 100, 70);
 
 		painel = new JPanel();
 		botao = new JLabel[9];
@@ -79,7 +98,7 @@ public class JogoDaVelhaView extends JFrame {
 		}
 
 		painel.setBackground(Color.white);
-		this.painel.setBounds(325, 100, 350, 350);
+		this.painel.setBounds(75, 50, 350, 350);
 
 	}
 
@@ -91,7 +110,14 @@ public class JogoDaVelhaView extends JFrame {
 
 	public int setBotao(Border borda, int posicao, String imagen) {
 
+		if( !Objects.isNull(botao[posicao].getIcon()))  {
+			
+			JOptionPane.showMessageDialog(null,"Escolha um campo vazio");
+			return 0;
+		}
+		
 		botao[posicao].setIcon(new javax.swing.ImageIcon(getClass().getResource(imagen)));
+		System.out.println(botao[posicao].getIcon().toString());
 		this.botao[posicao].setBorder(borda);
 		return posicao;
 	}
