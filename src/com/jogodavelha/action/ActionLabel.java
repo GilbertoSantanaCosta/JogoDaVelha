@@ -21,16 +21,14 @@ public class ActionLabel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 
 		String imagen = logica.modarImagen(jogoDaVelhaView);
-
 		String str = e.toString();
 		String ultimaPosicao;
 		ultimaPosicao = String.valueOf(str.charAt(str.length() - 1));
 		int posicao = Integer.valueOf(ultimaPosicao);
-		jogoDaVelhaView.setJaSelecionado(1);
 		jogoDaVelhaView.setBotao(BorderFactory.createLineBorder(Color.black, 1), posicao, imagen);
-		
 		logica.ganhandoJogo(jogoDaVelhaView);
-
+		
+		
 	}
 
 	@Override

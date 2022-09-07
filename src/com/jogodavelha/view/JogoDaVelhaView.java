@@ -34,6 +34,7 @@ public class JogoDaVelhaView extends JFrame {
 	public int contador = 0;
 	public int pontosX = 0;
 	public int pontosO = 0;
+	public boolean eVazio;
 
 	private static final long serialVersionUID = 1L;
 
@@ -113,7 +114,11 @@ public class JogoDaVelhaView extends JFrame {
 		if( !Objects.isNull(botao[posicao].getIcon()))  {
 			
 			JOptionPane.showMessageDialog(null,"Escolha um campo vazio");
+			eVazio = false;
+			
 			return 0;
+		}else {
+			eVazio = true;
 		}
 		
 		botao[posicao].setIcon(new javax.swing.ImageIcon(getClass().getResource(imagen)));
@@ -128,6 +133,19 @@ public class JogoDaVelhaView extends JFrame {
 
 	public void setJaSelecionado(int jaSelecionado) {
 		this.jaSelecionado = jaSelecionado;
+	}
+	
+	public void desabilitaBotao() {
+
+		for(int i = 0; i < botao.length; i++ ) {
+			
+			if( !Objects.isNull(botao[i].getIcon()))  {
+				
+				this.botao[i].setEnabled(false);
+				
+			}
+		}
+		
 	}
 
 	public String getImgX() {

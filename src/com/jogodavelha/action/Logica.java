@@ -22,14 +22,19 @@ public class Logica {
 		UIManager.put("OptionPane.cancelButtonText", null);
 		UIManager.put("OptionPane.noButtonText", "O");
 		UIManager.put("OptionPane.yesButtonText", "X");
+		
+		
+		
 
-		if (jogoDaVelhaView.getJaSelecionado() == 1) {
+		if (jogoDaVelhaView.getJaSelecionado() == 1 && jogoDaVelhaView.eVazio == true) {
 			if (jogoDaVelhaView.getImg() == "/imagens/o.jpg") {
 
 				jogoDaVelhaView.setImg(jogoDaVelhaView.getImgX());
+				
 			} else {
 
 				jogoDaVelhaView.setImg(jogoDaVelhaView.getImgO());
+			
 			}
 			
 		}
@@ -38,14 +43,17 @@ public class Logica {
 			x_o = JOptionPane.showConfirmDialog(null, "Escolha X ou O para iniciar o jogo");
 			if (x_o == 0) {
 				jogoDaVelhaView.setImg(jogoDaVelhaView.getImgX());
-
+				jogoDaVelhaView.contador++;
+				jogoDaVelhaView.setJaSelecionado(1);
 			} else if (x_o == 1) {
 				jogoDaVelhaView.setImg(jogoDaVelhaView.getImgO());
-
+				jogoDaVelhaView.contador++;
+				jogoDaVelhaView.setJaSelecionado(1);
+			}else {
+				jogoDaVelhaView.setJaSelecionado(0);
 			}
 		}
-		jogoDaVelhaView.contador++;
-		System.out.println(jogoDaVelhaView.contador);
+		
 		return jogoDaVelhaView.getImg();
 	}
 
@@ -58,6 +66,8 @@ public class Logica {
 				valor[i] = String.valueOf(i);
 			}
 		}
+		jogoDaVelhaView.contador = jogoDaVelhaView.contador + 1;
+		System.out.println(jogoDaVelhaView.contador);
 
 		if (valor[0].equals(valor[1]) && valor[0].equals(valor[2])
 				|| valor[0].equals(valor[3]) && valor[0].equals(valor[6])
@@ -75,24 +85,35 @@ public class Logica {
 			}else {
 				jogoDaVelhaView.pontosX++;
 			}
+			
 			jogoDaVelhaView.pontoO.setText("Jogador O: " + jogoDaVelhaView.pontosO);
 			jogoDaVelhaView.pontoX.setText("Jogador X: " + jogoDaVelhaView.pontosX);
-			
 			JOptionPane.showMessageDialog(null, ganhou);
+			
 			jogoDaVelhaView.contador = 0;
 			jogoGanho = true;
 			
 		}
 		
-		if (jogoGanho == true || jogoDaVelhaView.contador == 9) {
+		
+		
+		
+		if (jogoGanho == true || jogoDaVelhaView.contador == 10) {
 
-			if(jogoDaVelhaView.contador == 9) {
+			if(jogoDaVelhaView.contador == 10) {
 				JOptionPane.showMessageDialog(null, "Não houve ganhador");
+				jogoDaVelhaView.setJaSelecionado(0);
+				jogoDaVelhaView.setImg(null);
+				jogoDaVelhaView.contador = 0;
+				
 			}
 			for (int i = 0; i < jogoDaVelhaView.botao.length; i++) {
-				jogoDaVelhaView.botao[i].setIcon(null);
-				jogoGanho = false;
+				
 				jogoDaVelhaView.setJaSelecionado(0);
+				jogoDaVelhaView.botao[i].setIcon(null);
+				jogoDaVelhaView.setImg(null);
+				jogoGanho = false;
+				
 			}
 		}
 	}
